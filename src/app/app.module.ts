@@ -1,22 +1,32 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { RoutingModule } from "./routing/routing.module";
 import { AppComponent } from './app.component';
 import { ChatComponent } from './chat/chat.component';
 import { MenuComponent } from './menu/menu.component';
 import { HeaderComponent } from './header/header.component';
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
+import { StatisticComponent } from './statistic/statistic.component';
+import { AuthenticationService } from './services/authentication.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     ChatComponent,
     MenuComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoginComponent,
+    HomeComponent,
+    StatisticComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule, HttpModule, FormsModule, ReactiveFormsModule, RoutingModule
   ],
-  providers: [],
+  providers: [AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
