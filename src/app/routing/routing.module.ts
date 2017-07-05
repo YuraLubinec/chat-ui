@@ -13,6 +13,7 @@ const appRoutes: Routes = [
   { path: "chat", component: ChatComponent, canActivate: [OperatorAuthGuard] },
   { path: "statistic", component: StatisticComponent, canActivate: [AdminAuthGuard] },
   { path: "home", component: HomeComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: "**", component: HomeComponent, pathMatch: 'full' }
 ]
 

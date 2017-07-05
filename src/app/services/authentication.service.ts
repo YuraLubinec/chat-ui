@@ -32,7 +32,7 @@ export class AuthenticationService {
 
   logout():void {
     
-    this.http.post(this.baseUrl+'/logout',{},{withCredentials:true}).toPromise().then(()=>this.checkAuthority()).catch(this.handleError);
+    this.http.post(this.baseUrl+'/logout',{},{withCredentials:true}).toPromise().then(()=>{this.checkAuthority(); this.router.navigate(["/"])}).catch(this.handleError);
 
   }
 
