@@ -14,7 +14,7 @@ const appRoutes: Routes = [
   { path: "statistic", component: StatisticComponent, canActivate: [AdminAuthGuard] },
   { path: "home", component: HomeComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: "**", component: HomeComponent, pathMatch: 'full' }
+  { path: "**", redirectTo: '/home', pathMatch: 'full' }
 ]
 
 @NgModule({
