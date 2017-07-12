@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { StatisticComponent } from './statistic/statistic.component';
 import { AuthenticationService } from './services/authentication.service';
+import { MainComponent } from './main/main.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { AuthenticationService } from './services/authentication.service';
     HeaderComponent,
     LoginComponent,
     HomeComponent,
-    StatisticComponent
+    StatisticComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule, HttpModule, FormsModule, ReactiveFormsModule, RoutingModule

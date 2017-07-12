@@ -8,14 +8,18 @@ import { AuthenticatedUser } from '../models/authenticatedUser';
 })
 export class MenuComponent implements OnInit {
 
-  @Input() userRole : String; 
+  @Input() userRole: String;
 
   constructor() {
 
-   }
+  }
 
   ngOnInit() {
 
+  }
+
+  getUserRole() {
+    return sessionStorage.getItem('currentChatUserRole');
   }
 
 }

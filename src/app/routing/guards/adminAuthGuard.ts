@@ -8,20 +8,15 @@ import { Subscription } from 'rxjs/Subscription';
 @Injectable()
 export class AdminAuthGuard implements CanActivate {
 
-  private userAuthority: AuthenticatedUser;
-
-  constructor(private authenticationService: AuthenticationService, private router: Router) {
-    this.userAuthority = this.authenticationService.getAuthority();
-    this.authenticationService.userAuthenticationObs
-    .subscribe(userAuthority =>this.userAuthority = userAuthority);
-  }
+  constructor(private router: Router) {}
+  
 
   canActivate() {
-   
-    if (this.userAuthority != null && this.userAuthority.role === "admin") {
+
+    if (sessionStorage.getItem('currentChatUserName') && sessionStorage.getItem('currentChatUserRole') === "admin") {
       return true;
     }
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
     return false;
   }
 

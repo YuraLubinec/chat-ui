@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    
     this.createEmptyForm();
   }
 
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
     this.unexpectedErrorOccured = false;
     let loginUser : LoginUser =  new LoginUser(this.loginForm.value.username, this.loginForm.value.password);
     this.authenticationService.login(loginUser)
-      .then(() => this.loginForm.reset)
+      .then(() => this.loginForm.reset())
       .catch(status => this.authenticationErrorHandler(status));
   }
 
