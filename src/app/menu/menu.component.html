@@ -12,28 +12,27 @@
             </button>
           </span>
         </div>
-        <!-- /input-group -->
       </li>
       <li routerLinkActive="active">
         <a [routerLink]="['home']"><i class="fa fa-home fa-fw"></i> Home Page </a>
       </li>
-      <li *ngIf="getUserRole()==='operator'" routerLinkActive="active">
+      <li *ngIf="getUserRole()==='OPERATOR'" routerLinkActive="active">
         <a [routerLink]="['chat']"><i class="fa fa-weixin fa-fw"></i> Chat Page </a>
       </li>
-      <li *ngIf="getUserRole()==='admin'">
+      <li *ngIf="getUserRole()==='ADMIN'">
         <a class="cursor-pointer"><i class="fa fa-bar-chart-o fa-fw"></i> Statistic<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
           <li routerLinkActive="active">
-            <a [routerLink]="['statistic']">Flot Charts</a>
+            <a [routerLink]="['statistic']">Statistic 1</a>
           </li>
           <li routerLinkActive="active">
-            <a [routerLink]="['statistic']">Morris.js Charts</a>
+            <a [routerLink]="['statistic']">Statistic 2</a>
           </li>
         </ul>
-        <!-- /.nav-second-level -->
+      </li>
+      <li *ngIf="getUserRole()==='ADMIN'" routerLinkActive="active">
+        <a [routerLink]="['registration']"><i class="fa fa-user fa-fw"></i> Register New Account </a>
       </li>
     </ul>
   </div>
-  <!-- /.sidebar-collapse -->
 </div>
-<!-- /.navbar-static-side -->

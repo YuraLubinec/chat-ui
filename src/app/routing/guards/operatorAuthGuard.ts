@@ -13,7 +13,7 @@ export class OperatorAuthGuard implements CanActivate {
 
   canActivate() {
 
-    if (sessionStorage.getItem('currentChatUserName') && sessionStorage.getItem('currentChatUserRole') === "operator") {
+    if (sessionStorage.getItem('currentChatUserName') && sessionStorage.getItem('currentChatUserRole') === "OPERATOR") {
       return true;
     }
     this.router.navigate(['/login']);

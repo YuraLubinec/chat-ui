@@ -5,6 +5,7 @@ import { ChatComponent } from '../chat/chat.component';
 import { HomeComponent } from '../home/home.component';
 import { MainComponent } from '../main/main.component';
 import { StatisticComponent } from '../statistic/statistic.component';
+import { RegistrationComponent } from '../registration/registration.component';
 import { AdminAuthGuard } from './guards/adminAuthGuard';
 import { OperatorAuthGuard } from './guards/operatorAuthGuard';
 import { NoAuthGuard } from './guards/noAuthGurad';
@@ -18,6 +19,7 @@ const appRoutes: Routes = [
       { path: "home", component: HomeComponent, canActivate: [AuthGuard] },
       { path: "chat", component: ChatComponent, canActivate: [OperatorAuthGuard] },
       { path: "statistic", component: StatisticComponent, canActivate: [AdminAuthGuard] },
+      { path: "registration", component: RegistrationComponent, canActivate: [AdminAuthGuard] },
       { path: '', redirectTo: 'home', pathMatch: 'full', canActivate: [AuthGuard] },
     ]
   },

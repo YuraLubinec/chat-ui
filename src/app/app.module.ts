@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { StatisticComponent } from './statistic/statistic.component';
 import { AuthenticationService } from './services/authentication.service';
 import { MainComponent } from './main/main.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { MainComponent } from './main/main.component';
     LoginComponent,
     HomeComponent,
     StatisticComponent,
-    MainComponent
+    MainComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule, HttpModule, FormsModule, ReactiveFormsModule, RoutingModule

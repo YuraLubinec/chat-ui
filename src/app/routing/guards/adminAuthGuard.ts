@@ -13,7 +13,7 @@ export class AdminAuthGuard implements CanActivate {
 
   canActivate() {
 
-    if (sessionStorage.getItem('currentChatUserName') && sessionStorage.getItem('currentChatUserRole') === "admin") {
+    if (sessionStorage.getItem('currentChatUserName') && sessionStorage.getItem('currentChatUserRole') === "ADMIN") {
       return true;
     }
     this.router.navigate(['/login']);
