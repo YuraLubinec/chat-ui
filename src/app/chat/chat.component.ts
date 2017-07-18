@@ -131,8 +131,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   handleCustomerMessage(response: any) {
 
-    let responseMessage = response as WebSocketMessage;
-    this.messages.push(new Message(responseMessage.getText(), this.customer_id, false));
+    this.messages.push(new Message(response.text, this.customer_id, false));
   }
 
   addNewClientRequestToChat(data) {
