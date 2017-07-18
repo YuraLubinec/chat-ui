@@ -6,7 +6,7 @@
   </div>
   <div class="row">
     <div class="col-lg-12 col-md-12">
-      <div class="alert alert-info cursor-pointer" (click)="startChat(connectionMessage.id,connectionMessage,dialog_id)" *ngFor='let connectionMessage of clientChatRequests'><i class="fa fa-comments" aria-hidden="true"></i>Клієнт {{connectionMessage.id}} хоче розпочати чат</div>
+      <div class="alert alert-info cursor-pointer" (click)="startChat(connectionMessage.id,connectionMessage.dialog_id)" *ngFor='let connectionMessage of clientChatRequests'><i class="fa fa-comments" aria-hidden="true"></i>Клієнт {{connectionMessage.id}} хоче розпочати чат</div>
     </div>
   </div>
   
