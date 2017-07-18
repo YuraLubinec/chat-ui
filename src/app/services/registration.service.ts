@@ -12,8 +12,8 @@ export class RegistrationService {
 
   }
 
-  registerNewUser(user: User): Promise<any>{
-    return this.http.post(this.baseUrl+'/registration', user, {withCredentials:true}).toPromise().catch(Promise.reject);
+  registerNewUser(user: User): Promise<Response>{
+    return this.http.post(this.baseUrl+'/registration', user, {withCredentials:true}).toPromise();
   }
 
   getAvailableRoles() {

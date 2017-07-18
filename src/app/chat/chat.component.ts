@@ -29,7 +29,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   constructor(private stomp: StompService, private fb: FormBuilder) {
   
-    this.webSocketConnectionError = 'щось пішло не так, спробуйте ще раз або в службу підтримки';
+    this.webSocketConnectionError = 'щось пішло не так, спробуйте ще раз або зверніться в службу підтримки';
     this.messages = [];
     this.clientChatRequests = [];
     this.operator_name  = sessionStorage.getItem('currentChatUserName'); 
