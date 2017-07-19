@@ -2,3 +2,15 @@
 .cursor-pointer {
   cursor: pointer;
 }
+
+.text-red {
+  color: red;
+}
+
+.text-inline {
+  display: inline;
+}
+
+.alert {
+  transition:opacity 5s linear !important;
+}
