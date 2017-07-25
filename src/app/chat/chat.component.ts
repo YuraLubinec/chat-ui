@@ -68,7 +68,7 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.clientRequestArraySubscription = null;
     }
     if (this.personalSubscription != null) {
-      this.sendChatEndMessage(this.customer_id);
+      this.sendChatEndMessage(this.customer_id, this.dialog_id);
       this.personalSubscription.unsubscribe();
       this.personalSubscription = null;
     }
@@ -101,12 +101,14 @@ export class ChatComponent implements OnInit, OnDestroy {
   endChat() {
 
     let customer = this.customer_id;
+    let dialog = this.dialog_id;
+    this.personalSubscription.unsubscribe();
     this.personalSubscription = null;
     this.customer_id = null;
     this.dialog_id = null;
     this.display = false;
     this.stomp.after('init').then(() => {
-      this.sendChatEndMessage(customer);
+      this.sendChatEndMessage(customer, dialog);
       this.subscription = this.stomp.subscribe('/topic/allChat', (data) => this.addNewClientRequestToChat(data));
       this.clientRequestArraySubscription = this.stomp.subscribe('/topic/checkClientRequestArray', (elem) =>
         this.clientChatRequests = this.clientChatRequests.filter((message: ConnectionMessage) => { message.getId != elem })
@@ -119,9 +121,9 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.personalSubscription = this.stomp.subscribe('/queue/' + this.operator_name, response => this.handleCustomerMessage(response))
   }
 
-  sendChatEndMessage(customer_id: string) {
+  sendChatEndMessage(customer_id: string, dialog_id: string) {
 
-    this.stomp.send('/chat/endNotification/' + customer_id, {})
+    this.stomp.send('/chat/endNotification/' + customer_id + '/' + dialog_id, {})
   }
 
   sendConnectionMessageToClient() {
