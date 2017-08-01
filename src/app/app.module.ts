@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { StompService } from 'ng2-stomp-service';
+import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 
 import { RoutingModule } from "./routing/routing.module";
 import { AppComponent } from './app.component';
@@ -15,7 +16,7 @@ import { StatisticComponent } from './statistic/statistic.component';
 import { AuthenticationService } from './services/authentication.service';
 import { MainComponent } from './main/main.component';
 import { RegistrationComponent } from './registration/registration.component';
-
+import { DialogComponent } from './dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -27,10 +28,11 @@ import { RegistrationComponent } from './registration/registration.component';
     HomeComponent,
     StatisticComponent,
     MainComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    DialogComponent
   ],
   imports: [
-    BrowserModule, HttpModule, FormsModule, ReactiveFormsModule, RoutingModule
+    BrowserModule, HttpModule, FormsModule, ReactiveFormsModule, RoutingModule, NKDatetimeModule
   ],
   providers: [AuthenticationService, StompService],
   bootstrap: [AppComponent]

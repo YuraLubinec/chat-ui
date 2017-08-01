@@ -31,6 +31,9 @@
         </ul>
       </li>
       <li *ngIf="getUserRole()==='ADMIN'" routerLinkActive="active">
+        <a [routerLink]="['dialog']"><i class="fa fa-user fa-fw"></i> Search dialogs </a>
+      </li>
+      <li *ngIf="getUserRole()==='ADMIN'" routerLinkActive="active">
         <a [routerLink]="['registration']"><i class="fa fa-user fa-fw"></i> Register New Account </a>
       </li>
     </ul>

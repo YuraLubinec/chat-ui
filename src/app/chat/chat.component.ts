@@ -13,8 +13,8 @@ import * as SockJS from 'sockjs-client';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit, OnDestroy {
+  
   private display: boolean;
-
   private webSocketConnectionError: string;
   private subscription: any;
   private personalSubscription: any;
@@ -61,18 +61,15 @@ export class ChatComponent implements OnInit, OnDestroy {
 
     if (this.subscription != null) {
       this.subscription.unsubscribe();
-      this.subscription = null;
     }
     if (this.clientRequestArraySubscription != null) {
       this.clientRequestArraySubscription.unsubscribe();
-      this.clientRequestArraySubscription = null;
     }
     if (this.personalSubscription != null) {
       this.sendChatEndMessage(this.customer_id, this.dialog_id);
       this.personalSubscription.unsubscribe();
-      this.personalSubscription = null;
     }
-    this.stomp.disconnect().then(() => { })
+    this.stomp.disconnect().then(() => {})
   }
 
   startChat(customer_id: string, dialog_id: string) {
@@ -106,6 +103,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.personalSubscription = null;
     this.customer_id = null;
     this.dialog_id = null;
+    this.messages = null;
     this.display = false;
     this.stomp.after('init').then(() => {
       this.sendChatEndMessage(customer, dialog);
@@ -154,7 +152,4 @@ export class ChatComponent implements OnInit, OnDestroy {
       text: [null, [Validators.required, Validators.minLength(1), Validators.maxLength(100)]],
     })
   }
-
-
-
 }
