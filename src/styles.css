@@ -14,3 +14,24 @@
 .alert {
   transition:opacity 5s linear !important;
 }
+
+.no-marging {
+  margin: 0px !important;
+}
+
+.display-inline {
+  display: inline !important;
+}
+
+.operator-message {
+  background-color: rgba(255, 0, 0, 0.2);
+}
+
+.consumer-message {
+  background-color: rgba(0, 0, 255, 0.2);
+}
+
+.add-side-padding {
+  padding-left: 15px;
+  padding-right: 15px;
+}

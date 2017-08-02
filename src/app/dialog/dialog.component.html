@@ -2,37 +2,71 @@
   <div class="row">
     <div class="col-lg-12 col-md-12">
       <h1 class="page-header">Сторінка перегляду завершених діалогів</h1>
-      <div class="col-lg-5 col-md-6">
-        <div *ngIf=" noSearchParametersNotification" class="alert alert-danger">
-          Введіть параметри пошуку!
-        </div>
-        <div class="form-group">
-          <label class="center-block">Пошук по даті:
+      <div class="row" *ngIf="!display">
+        <div class="col-lg-5 col-md-6">
+          <div *ngIf="noSearchParametersNotification" class="alert alert-danger">
+            Введіть параметри пошуку!
+          </div>
+          <div class="form-group">
+            <label class="">Пошук по даті:
             <datetime [(ngModel)]="date" [timepicker]="false" [datepicker]="datepickerOpts"></datetime>
           </label>
-        </div>
-        <form role="form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
-          <fieldset>
-            <div class="form-group">
-              <label class="center-block">Пошук по імені оператора:
+          </div>
+          <form role="form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+            <fieldset>
+              <div class="form-group">
+                <label class="center-block">Пошук по імені оператора:
                 <input class="form-control" placeholder="введіть логін оператора" type="text" formControlName="operator_name">
               </label>
-            </div>
-            <div class="form-group">
-              <label class="center-block">Пошук по користувачу:
+              </div>
+              <div class="form-group">
+                <label class="center-block">Пошук по користувачу:
                 <input class="form-control" placeholder="введіть особовий рахунок/номер договору" type="text" formControlName="customer_id">
               </label>
-            </div>
-            <button type="submit" class="btn btn-success">Шукати</button>
-          </fieldset>
-        </form>
-      </div>
-      <div class="row">
-        <div class="col-lg-12 col-md-12">
-          <div class="alert alert-info cursor-pointer" *ngFor='let dialog of dialogs'><i class="fa fa-comments" aria-hidden="true"></i>Клієнт {{dialog.customerId}}, оператор {{dialog.operator}}</div>
+              </div>
+              <button type="submit" class="btn btn-success">Шукати</button>
+            </fieldset>
+          </form>
         </div>
       </div>
-    </div>
+      <br>
+      <div class="row" *ngIf="!display">
+        <div class="col-lg-12 col-md-12">
+          <h3 *ngIf="dialogs"> Виберіть діалог що Вас цікавить</h3>
+          <div class="alert alert-info cursor-pointer" *ngFor='let dialog of dialogs' (click)="showDialog(dialog)"><i class="fa fa-comments" aria-hidden="true"></i>Клієнт {{dialog.customerId}} оператор {{dialog.operator}}</div>
+        </div>
+      </div>
+      <div class="row" *ngIf="display">
+        <div class="col-lg-12 col-md-12">
+          <div class="chat-panel panel panel-default">
+            <div class="panel-body">
+              <ul class="chat">
+                <li class="clearfix no-marging add-side-padding" [ngClass]="{'left': message.operator_login, 'right': !message.operator_login, 'operator-message': message.operator_login, 'consumer-message': !message.operator_login}" *ngFor="let message of selectedDialog.messages">
+                  <div class="chat-body clearfix">
+                    <div *ngIf="message.operator_login" class="">
+                      <div class="header">
+                        <strong class="primary-font">{{selectedDialog.operator}}</strong>
+                        <small class="text-muted"><i class="fa fa-clock-o fa-fw"></i> {{message.date}}</small>
+                      </div>
+                      <p>{{message.text}}</p>
+                    </div>
+                    <div *ngIf="!message.operator_login" class="">
+                      <div class="header pull-right">
+                        <strong class="primary-font">Клієнт {{selectedDialog.customerId}}</strong>
+                        <small class="text-muted"><i class="fa fa-clock-o fa-fw"></i> {{message.date}}</small>
+                      </div>
+                      <br>
+                      <p class="pull-right">{{message.text}}</p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <button class="btn btn-default" (click)="hideDialog()">Назад</button>
+        </div>
+      </div>
 
+    </div>
   </div>
 </div>

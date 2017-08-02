@@ -15,10 +15,13 @@ export class DialogComponent implements OnInit {
   private datepickerOpts;
   private date: Date;
   private searchForm: FormGroup;
-  private dialogs: Array<Dialog>
+  private dialogs: Array<Dialog>;
+  private display: boolean;
+  private selectedDialog : Dialog;
 
   constructor(private dialogService: DialogService, private fb: FormBuilder) {
     this.date = null;
+    this.display = false;
     this.datepickerOpts = {
       autoclose: true,
       format: 'yyyy-mm-dd',
@@ -46,31 +49,43 @@ export class DialogComponent implements OnInit {
     let operator_name = null;
     let customer_id = null;
     let date = null;
-    if (this.searchForm.value.operator_name != null && this.searchForm.value.operator_name !=""){
+    if (this.searchForm.value.operator_name != null && this.searchForm.value.operator_name != "") {
       operator_name = this.searchForm.value.operator_name;
     }
-    if (this.searchForm.value.customer_id != null && this.searchForm.value.customer_id !=""){
+    if (this.searchForm.value.customer_id != null && this.searchForm.value.customer_id != "") {
       customer_id = this.searchForm.value.customer_id;
     }
     if (this.date != null) {
       date = this.date.getFullYear() + '-' + ('0' + (this.date.getMonth() + 1)).slice(-2) + '-' + ('0' + this.date.getDate()).slice(-2)
     }
     if (operator_name != null && customer_id != null && date != null) {
-
+      this.dialogService.getAllCustomerAndOperatorDialogsForDate(customer_id, operator_name, date).subscribe(data => this.dialogs = data.json() as Array<Dialog>, this.searchErrorHandler);
     } else if (operator_name != null && customer_id != null) {
-
+      this.dialogService.getAllCustomerAndOperatorDialogs(customer_id, operator_name).subscribe(data => this.dialogs = data.json() as Array<Dialog>, this.searchErrorHandler);
     } else if (operator_name != null && date != null) {
-      this.dialogService.getAllOperatorDialogsForDate(operator_name, date ).subscribe(data => this.dialogs = data.json() as Array<Dialog>, this.searchErrorHandler);
+      this.dialogService.getAllOperatorDialogsForDate(operator_name, date).subscribe(data => this.dialogs = data.json() as Array<Dialog>, this.searchErrorHandler);
     } else if (customer_id != null && date != null) {
-      this.dialogService.getAllCustomerDialogsForDate(customer_id,date).subscribe(data => this.dialogs = data.json() as Array<Dialog>, this.searchErrorHandler);
+      this.dialogService.getAllCustomerDialogsForDate(customer_id, date).subscribe(data => this.dialogs = data.json() as Array<Dialog>, this.searchErrorHandler);
     } else if (operator_name != null) {
       this.dialogService.getAllOperatorDialogs(operator_name).subscribe(data => this.dialogs = data.json() as Array<Dialog>, this.searchErrorHandler);
     } else if (customer_id != null) {
       this.dialogService.getAllCustomerDialogs(customer_id).subscribe(data => this.dialogs = data.json() as Array<Dialog>, this.searchErrorHandler);
+    } else if (date != null) {
+      this.dialogService.getAllForDate(date).subscribe(data => this.dialogs = data.json() as Array<Dialog>, this.searchErrorHandler);
     }
     else {
       this.noSearchParametersNotification = true;
     }
+  }
+
+  showDialog(dialog : Dialog){
+    this.selectedDialog = dialog;
+    this.display = true;
+  }
+
+  hideDialog(){
+    this.display = false;
+    this.selectedDialog = null;
   }
 
   searchErrorHandler(error: any) {

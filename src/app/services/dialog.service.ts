@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class DialogService {
-  private baseUrl = 'http://localhost:8082/chat/admin';
+  private baseUrl = 'http://localhost:8082/chat/admin/dialog';
 
   constructor(private http: Http) {
 
@@ -25,5 +25,18 @@ export class DialogService {
   getAllCustomerDialogsForDate(customer_id: string, date: string): Observable<Response> {
     return this.http.get(this.baseUrl + "/customer/" + customer_id + "/" + date, { withCredentials: true });
   }
+
+  getAllForDate(date: string): Observable<Response> {
+    return this.http.get(this.baseUrl + "/date/" + date, { withCredentials: true });
+  }
+
+  getAllCustomerAndOperatorDialogsForDate(customer_id: string, operator: string, date: string): Observable<Response> {
+    return this.http.get(this.baseUrl + "/" + customer_id + "/" + operator + "/" + date, { withCredentials: true });
+  }
+
+  getAllCustomerAndOperatorDialogs(customer_id: string, operator: string): Observable<Response> {
+    return this.http.get(this.baseUrl + "/" + customer_id + "/" + operator, { withCredentials: true });
+  }
+
 
 }
