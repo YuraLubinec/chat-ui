@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
 import { ChatComponent } from '../chat/chat.component';
 import { HomeComponent } from '../home/home.component';
+import { UserComponent } from '../user/user.component';
 import { MainComponent } from '../main/main.component';
 import { DialogComponent } from '../dialog/dialog.component'
 import { StatisticComponent } from '../statistic/statistic.component';
@@ -19,6 +20,7 @@ const appRoutes: Routes = [
   {
     path: "main", component: MainComponent, canActivate: [AuthGuard], children: [
       { path: "home", component: HomeComponent, canActivate: [AuthGuard] },
+      { path: "user", component: UserComponent, canActivate: [AuthGuard] },
       { path: "chat", component: ChatComponent, canActivate: [OperatorAuthGuard] },
       { path: "statistic", component: StatisticComponent, canActivate: [AdminAuthGuard] },
       { path: "registration", component: RegistrationComponent, canActivate: [AdminAuthGuard] },

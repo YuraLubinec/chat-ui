@@ -1,3 +1,31 @@
 .chat-body {
   margin: 0px !important;
 }
+
+.operator-message {
+  background-color: #DFF0D8;
+}
+
+.consumer-message {
+  background-color: #D9EDF7;
+}
+
+.add-side-padding {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+ul li {
+  border: none;    
+  -moz-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  border-radius: 4px;
+  margin-bottom: 5px !important;
+}
+
+ul li:last-child { 
+  margin-bottom: 0px !important;
+}

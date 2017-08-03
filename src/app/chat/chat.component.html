@@ -1,7 +1,7 @@
 <div id="page-wrapper">
   <div class="row">
     <div class="col-lg-12 col-md-12">
-      <h1 class="page-header">Chat page</h1>
+      <h1 class="page-header">Сторінка опратора чату</h1>
     </div>
   </div>
   <div class="row">
@@ -9,9 +9,9 @@
       <div class="alert alert-info cursor-pointer" (click)="startChat(connectionMessage.id,connectionMessage.dialog_id)" *ngFor='let connectionMessage of clientChatRequests'><i class="fa fa-comments" aria-hidden="true"></i>Клієнт {{connectionMessage.id}} хоче розпочати чат</div>
     </div>
   </div>
-  
+
   <div class="row" *ngIf="display">
-  <!--<div class="row" *ngIf="true">-->
+    <!--<div class="row" *ngIf="true">-->
     <div class="col-lg-12 col-md-12">
       <div class="chat-panel panel panel-default">
         <div class="panel-heading">
@@ -52,6 +52,30 @@
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
+          <ul class="chat round-border">
+            <li class="clearfix no-marging add-side-padding" [ngClass]="{'left': message.isOperator, 'right': !message.isOperator, 'operator-message': message.isOperator, 'consumer-message': !message.isOperator}"
+              *ngFor="let message of messages">
+              <div class="chat-body clearfix">
+                <div *ngIf="message.isOperator">
+                  <div class="header">
+                    <strong class="primary-font">{{message.username}}</strong>
+                    <small class="text-muted"><i class="fa fa-clock-o fa-fw"></i> {{message.date}}</small>
+                  </div>
+                  <p>{{message.text}}</p>
+                </div>
+                <div *ngIf="!message.isOperator" class="">
+                  <div class="header pull-right">
+                    <strong class="primary-font">Клієнт {{message.username}}</strong>
+                    <small class="text-muted"><i class="fa fa-clock-o fa-fw"></i> {{message.date}}</small>
+                  </div>
+                  <br>
+                  <p class="pull-right">{{message.text}}</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!--<div class="panel-body">
           <ul class="chat">
             <li class="clearfix" [ngClass]="{'left': message.isOperator, 'right': !message.isOperator}" *ngFor="let message of messages">
               <div class="chat-body clearfix">
@@ -69,7 +93,7 @@
               </div>
             </li>
           </ul>
-        </div>
+        </div>-->
         <!-- /.panel-body -->
         <div class="panel-footer">
           <form role="form" [formGroup]="messageForm" (ngSubmit)="sendMessage()">

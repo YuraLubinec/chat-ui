@@ -1,4 +1,5 @@
 export class User {
+  id;
   private username;
   private password;
   private role;

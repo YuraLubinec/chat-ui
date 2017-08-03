@@ -1,0 +1,31 @@
+<div id="page-wrapper">
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <h1 class="page-header">Тут Ви можете переглянути інформацію про Ваш акаунт</h1>
+      <div *ngIf="user" class="col-lg-4 col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            Інформація по Вашому акаунту
+          </div>
+          <div class="add-margin">
+            <div class="form-group">
+              <label class="center-block">Повне ім'я:
+            <p class="form-control">{{user.fullName}}</p>
+          </label>
+            </div>
+            <div class="form-group">
+              <label class="center-block">Ваші права:
+            <p class="form-control" *ngIf="user.role=='OPERATOR'">Оператор</p>
+            <p class="form-control" *ngIf="user.role=='ADMIN'">Адміністратор</p>
+          </label>
+            </div>
+            <div class="form-group">
+              <label class="center-block">Логін:
+            <p class="form-control" >{{user.username}}</p>
+          </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

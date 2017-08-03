@@ -13,10 +13,10 @@ export class RegistrationService {
   }
 
   registerNewUser(user: User): Promise<Response>{
-    return this.http.post(this.baseUrl+'/registration', user, {withCredentials:true}).toPromise();
+    return this.http.post(this.baseUrl, user, {withCredentials:true}).toPromise();
   }
 
   getAvailableRoles() {
-    return this.http.get(this.baseUrl+'/roles', {withCredentials:true});
+    return this.http.get(this.baseUrl+'/role', {withCredentials:true});
   }
 }

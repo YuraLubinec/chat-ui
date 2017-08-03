@@ -14,9 +14,11 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { StatisticComponent } from './statistic/statistic.component';
 import { AuthenticationService } from './services/authentication.service';
+import { UserService } from "./services/user.service";
 import { MainComponent } from './main/main.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { DialogComponent } from './dialog/dialog.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -29,12 +31,13 @@ import { DialogComponent } from './dialog/dialog.component';
     StatisticComponent,
     MainComponent,
     RegistrationComponent,
-    DialogComponent
+    DialogComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule, HttpModule, FormsModule, ReactiveFormsModule, RoutingModule, NKDatetimeModule
   ],
-  providers: [AuthenticationService, StompService],
+  providers: [AuthenticationService, StompService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

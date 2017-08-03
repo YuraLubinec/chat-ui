@@ -3,7 +3,7 @@
         <div class="col-md-4 col-md-offset-4">
             <div class="login-panel panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Please Sign In</h3>
+                    <h3 class="panel-title">Будь ласка увійдіть в систему</h3>
                 </div>
                 <div class="panel-body">
                     <form role="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -15,13 +15,13 @@
                                 {{defaultErrorMessage}}
                             </div>
                             <div class="form-group">
-                                <input class="form-control" placeholder="username" #user name="username" type="text" autofocus formControlName="username">
+                                <input class="form-control" placeholder="логін" #user name="username" type="text" autofocus formControlName="username">
                             </div>
 
                             <div class="form-group">
-                                <input class="form-control" placeholder="Password" name="password" type="password" formControlName="password">
+                                <input class="form-control" placeholder="пароль" name="password" type="password" formControlName="password">
                             </div>
-                            <button type="submit" [disabled]="!loginForm.valid" class="btn btn-lg btn-success btn-block">Login</button>
+                            <button type="submit" [disabled]="!loginForm.valid" class="btn btn-lg btn-success btn-block">Увійти</button>
                         </fieldset>
                     </form>
                 </div>

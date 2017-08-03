@@ -1,90 +1,86 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12 col-md-12">
+
             <h1 class="page-header">Сторінка реєстрації користувачів</h1>
-            <div class="col-lg-5 col-md-6">
-                <form role="form" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-                    <fieldset>
-                        <div *ngIf="serverValidationError" class="alert alert-danger">
-                            {{ serverValidationError }}
-                        </div>
-                        <div *ngIf="operationIsSuccess" class="alert alert-success">
-                            Користувача зареєстровано!
-                        </div>
-                        <div class="form-group">
-                            <label class="center-block text-red">Всі поля є обов'язковими до заповнення</label>
-                        </div>
-                        <div class="form-group">
-                            <label class="center-block">Логін (унікальний для кожного користувача):
+            <div class="col-lg-6 col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Для реєстрації заповніть форму <p class="text-red display-inline">(Всі поля є обов'язковими до заповнення)</p>
+                    </div>
+                    <form role="form" [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="add-margin">
+                        <fieldset>
+                            <div *ngIf="serverValidationError" class="alert alert-danger">
+                                {{ serverValidationError }}
+                            </div>
+                            <div *ngIf="operationIsSuccess" class="alert alert-success">
+                                Користувача зареєстровано!
+                            </div>
+                            <div class="form-group">
+                                <label class="center-block">Логін (унікальний для кожного користувача):
                                     <input class="form-control" placeholder="від 4 до 15 латинських букв" type="text" autofocus formControlName="username">
                                 </label>
-                        </div>
-                        <div class="form-group">
-                            <label class="center-block">Пароль для входу в систему:
+                            </div>
+                            <div class="form-group">
+                                <label class="center-block">Пароль для входу в систему:
                                     <input class="form-control" placeholder="від 8 до 15 символів" [attr.type]="display" formControlName="password">
                                     <input type="checkbox" (change)="displayPassword($event.target.checked)" > <p class="text-danger text-inline">показати пароль</p>
                                  </label>
-                        </div>
-                        <div class="form-group">
-                            <label class="center-block">Тип користувача:
+                            </div>
+                            <div class="form-group">
+                                <label class="center-block">Тип користувача:
                                     <select class="form-control" formControlName="role">
                                         <option [value]="null" disabled>Виберіть тип користувача</option>
                                         <option *ngFor="let role of roles" [value]="role.identifier">{{role.value}}</option>
                                     </select>
                                  </label>
-                        </div>
-                        <div class="form-group">
-                            <label class="center-block">Повне ім'я:
+                            </div>
+                            <div class="form-group">
+                                <label class="center-block">Повне ім'я:
                                     <input class="form-control" placeholder="введіть ім'я та прізвище українськими літерами" type="text" formControlName="fullName">
                                  </label>
-                        </div>
-                        <button type="submit" [disabled]="!registrationForm.valid" class="btn btn-success">Save</button>
-                    </fieldset>
-                </form>
-            </div>
-        </div>
-        <!-- /.col-lg-12 -->
-    </div>
-</div>
-
-
-<!--<div class="container">
-    <div class="row">
-        <div class="col-md-6 col-lg-6">
-            <div class="login-panel panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Please, fill in all the fields for registration</h3>
-                </div>
-                <div class="panel-body">
-                    <form role="form" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-                        <fieldset>
-                            <div class="form-group">
-                                <label class="center-block">Username:
-                                    <input class="form-control" placeholder="username" type="text" autofocus formControlName="username">
-                                </label>
                             </div>
-                            <div class="form-group">
-                                <label class="center-block">Password:
-                                    <input class="form-control" placeholder="password" type="password" formControlName="password">
-                                 </label>
-                            </div>
-                            <div class="form-group">
-                                <label class="center-block">Role:
-                                    <select class="form-control" formControlName="role">
-                                        <option *ngFor="let role of roles" [value]="role.identifier">{{role.value}}</option>
-                                    </select>
-                                 </label>
-                            </div>
-                            <div class="form-group">
-                                <label class="center-block">Full name:
-                                    <input class="form-control" placeholder="full name" type="text" formControlName="fullName">
-                                 </label>
-                            </div>
-                            <button type="submit" [disabled]="!registrationForm.valid" class="btn btn-lg btn-success btn-block">Save</button>
+                            <button type="submit" [disabled]="!registrationForm.valid" class="btn btn-success">Save</button>
                         </fieldset>
                     </form>
                 </div>
             </div>
+
+
+            <div class="col-lg-6 col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Перелік користувачів
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Логін</th>
+                                        <th>Повне ім'я</th>
+                                        <th>Надані права</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let user of users">
+                                        <td>{{user.username}}</td>
+                                        <td>{{user.fullName}}</td>
+                                        <td *ngIf="user.role=='OPERATOR'">Оператор</td>
+                                        <td *ngIf="user.role=='ADMIN'">Адміністратор</td>
+                                        <td><button class="btn btn-danger btn-xs" (click)="delete(user.id)">Видалити</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
         </div>
     </div>
-</div>-->
+</div>

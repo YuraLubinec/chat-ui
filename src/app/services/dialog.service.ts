@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -36,6 +36,13 @@ export class DialogService {
 
   getAllCustomerAndOperatorDialogs(customer_id: string, operator: string): Observable<Response> {
     return this.http.get(this.baseUrl + "/" + customer_id + "/" + operator, { withCredentials: true });
+  }
+
+  getAllDialogsWithTextInMessage(text: string): Observable<Response> {
+    let urlParams = new URLSearchParams();
+    urlParams.append('text', text);
+    console.log(text);
+    return this.http.get(this.baseUrl + "/text", { withCredentials: true, params: urlParams});
   }
 
 

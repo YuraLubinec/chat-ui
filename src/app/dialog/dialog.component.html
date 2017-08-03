@@ -2,46 +2,69 @@
   <div class="row">
     <div class="col-lg-12 col-md-12">
       <h1 class="page-header">Сторінка перегляду завершених діалогів</h1>
-      <div class="row" *ngIf="!display">
-        <div class="col-lg-5 col-md-6">
-          <div *ngIf="noSearchParametersNotification" class="alert alert-danger">
-            Введіть параметри пошуку!
-          </div>
-          <div class="form-group">
-            <label class="">Пошук по даті:
+      <div *ngIf="!display">
+        <div class="col-lg-6 col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              Заповніть поля для пошуку
+              <p class="text-red display-inline">(Пошук по слову або фразі здійснюєтсья окремо)</p>
+            </div>
+            <div class="add-margin">
+              <div *ngIf="noSearchParametersNotification" class="alert alert-danger">
+                Введіть параметри пошуку!
+              </div>
+              <div *ngIf="noSearchResult" class="alert alert-info">
+                За даними параметрами збігів не знайдено!
+              </div>
+              <div class="form-group">
+                <label class="">Пошук по даті:
             <datetime [(ngModel)]="date" [timepicker]="false" [datepicker]="datepickerOpts"></datetime>
           </label>
+              </div>
+              <form role="form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+                <fieldset>
+                  <div class="form-group">
+                    <label class="center-block">Пошук по імені оператора:
+                  <input class="form-control" placeholder="введіть логін оператора" type="text" formControlName="operator_name">
+                </label>
+                  </div>
+                  <div class="form-group">
+                    <label class="center-block">Пошук по користувачу:
+                  <input class="form-control" placeholder="введіть особовий рахунок/номер договору" type="text" formControlName="customer_id">
+                </label>
+                  </div>
+                  <div class="form-group">
+                    <label class="center-block">Пошук по тексту:
+                  <input class="form-control" placeholder="введіть слово або фразу" type="text" formControlName="text">
+                </label>
+                  </div>
+                  <button type="submit" class="btn btn-success">Шукати</button>
+                  <a class="btn btn-default" (click)="reset()">Очистити</a>
+                </fieldset>
+              </form>
+            </div>
           </div>
-          <form role="form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
-            <fieldset>
-              <div class="form-group">
-                <label class="center-block">Пошук по імені оператора:
-                <input class="form-control" placeholder="введіть логін оператора" type="text" formControlName="operator_name">
-              </label>
-              </div>
-              <div class="form-group">
-                <label class="center-block">Пошук по користувачу:
-                <input class="form-control" placeholder="введіть особовий рахунок/номер договору" type="text" formControlName="customer_id">
-              </label>
-              </div>
-              <button type="submit" class="btn btn-success">Шукати</button>
-            </fieldset>
-          </form>
         </div>
       </div>
-      <br>
-      <div class="row" *ngIf="!display">
-        <div class="col-lg-12 col-md-12">
-          <h3 *ngIf="dialogs"> Виберіть діалог що Вас цікавить</h3>
-          <div class="alert alert-info cursor-pointer" *ngFor='let dialog of dialogs' (click)="showDialog(dialog)"><i class="fa fa-comments" aria-hidden="true"></i>Клієнт {{dialog.customerId}} оператор {{dialog.operator}}</div>
+      <div *ngIf="dialogs.length != 0">
+        <div class="col-lg-6 col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              Виберіть діалог що Вас цікавить
+            </div>
+            <div class="add-margin">
+              <div class="alert alert-info cursor-pointer" *ngFor='let dialog of dialogs' (click)="showDialog(dialog)"><i class="fa fa-comments" aria-hidden="true"></i>Клієнт {{dialog.customerId}} оператор {{dialog.operator}}</div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row" *ngIf="display">
+      <div *ngIf="display">
         <div class="col-lg-12 col-md-12">
           <div class="chat-panel panel panel-default">
             <div class="panel-body">
-              <ul class="chat">
-                <li class="clearfix no-marging add-side-padding" [ngClass]="{'left': message.operator_login, 'right': !message.operator_login, 'operator-message': message.operator_login, 'consumer-message': !message.operator_login}" *ngFor="let message of selectedDialog.messages">
+              <ul class="chat round-border">
+                <li class="clearfix no-marging add-side-padding" [ngClass]="{'left': message.operator_login, 'right': !message.operator_login, 'operator-message': message.operator_login, 'consumer-message': !message.operator_login}"
+                  *ngFor="let message of selectedDialog.messages">
                   <div class="chat-body clearfix">
                     <div *ngIf="message.operator_login" class="">
                       <div class="header">

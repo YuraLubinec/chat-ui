@@ -4,7 +4,6 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { LoginUser } from '../models/loginUser';
 import { AuthenticatedUser } from '../models/authenticatedUser';
 import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
