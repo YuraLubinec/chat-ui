@@ -18,8 +18,8 @@
               </div>
                
                 <label><p class="no-margin no-padding col-lg-12 col-md-12">Пошук по даті</p>
-                  <datetime [(ngModel)]="dateStart" [timepicker]="false" [datepicker]="datePickerFromOpts" class="no-padding col-lg-6 col-md-6"></datetime>
-                  <datetime [(ngModel)]="dateEnd" [timepicker]="false" [datepicker]="datePickerToOpts" class="no-padding col-lg-6 col-md-6"></datetime>
+                  <datetime [(ngModel)]="dateStart" [timepicker]="false" [datepicker]="datePickerFromOpts" class="no-left-padding col-lg-6 col-md-6"></datetime>
+                  <datetime [(ngModel)]="dateEnd" [timepicker]="false" [datepicker]="datePickerToOpts" class="no-left-padding col-lg-6 col-md-6"></datetime>
                 </label>
            
               <form role="form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">

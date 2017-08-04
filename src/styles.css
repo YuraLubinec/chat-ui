@@ -23,6 +23,10 @@
   padding: 0px !important;
 }
 
+.no-left-padding {
+  padding-left: 0px !important;
+}
+
 .display-inline {
   display: inline !important;
 }
