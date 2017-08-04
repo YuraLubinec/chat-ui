@@ -18,20 +18,20 @@ export class DialogService {
     return this.http.get(this.baseUrl + "/customer/" + customer_id, { withCredentials: true });
   }
 
-  getAllOperatorDialogsForDate(operator: string, date: string): Observable<Response> {
-    return this.http.get(this.baseUrl + "/operator/" + operator + "/" + date, { withCredentials: true });
+  getAllOperatorDialogsForDate(operator: string, dateStart: string, dateEnd: string): Observable<Response> {
+    return this.http.get(this.baseUrl + "/operator/" + operator + "/" + dateStart + "/" + dateEnd, { withCredentials: true });
   }
 
-  getAllCustomerDialogsForDate(customer_id: string, date: string): Observable<Response> {
-    return this.http.get(this.baseUrl + "/customer/" + customer_id + "/" + date, { withCredentials: true });
+  getAllCustomerDialogsForDate(customer_id: string, dateStart: string, dateEnd: string): Observable<Response> {
+    return this.http.get(this.baseUrl + "/customer/" + customer_id + "/" + dateStart + "/" + dateEnd, { withCredentials: true });
   }
 
-  getAllForDate(date: string): Observable<Response> {
-    return this.http.get(this.baseUrl + "/date/" + date, { withCredentials: true });
+  getAllForDate(dateStart: string, dateEnd: string): Observable<Response> {
+    return this.http.get(this.baseUrl + "/date/" + dateStart + "/" + dateEnd, { withCredentials: true });
   }
 
-  getAllCustomerAndOperatorDialogsForDate(customer_id: string, operator: string, date: string): Observable<Response> {
-    return this.http.get(this.baseUrl + "/" + customer_id + "/" + operator + "/" + date, { withCredentials: true });
+  getAllCustomerAndOperatorDialogsForDate(customer_id: string, operator: string, dateStart: string, dateEnd: string): Observable<Response> {
+    return this.http.get(this.baseUrl + "/" + customer_id + "/" + operator + "/" + dateStart + "/" + dateEnd, { withCredentials: true });
   }
 
   getAllCustomerAndOperatorDialogs(customer_id: string, operator: string): Observable<Response> {
@@ -42,7 +42,7 @@ export class DialogService {
     let urlParams = new URLSearchParams();
     urlParams.append('text', text);
     console.log(text);
-    return this.http.get(this.baseUrl + "/text", { withCredentials: true, params: urlParams});
+    return this.http.get(this.baseUrl + "/text", { withCredentials: true, params: urlParams });
   }
 
 

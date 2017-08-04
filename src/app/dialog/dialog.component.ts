@@ -14,23 +14,33 @@ import { DialogMessage } from '../models/dialogMessage';
 export class DialogComponent implements OnInit {
   private noSearchParametersNotification: boolean;
   private noSearchResult: boolean;
-  private datepickerOpts;
-  private date: Date;
+  private datePickerFromOpts;
+  private datePickerToOpts;
+  private dateStart: Date;
+  private dateEnd: Date;
   private searchForm: FormGroup;
   private dialogs: Array<Dialog>;
   private display: boolean;
   private selectedDialog: Dialog;
 
   constructor(private dialogService: DialogService, private fb: FormBuilder) {
-    this.date = null;
+    this.dateStart = null;
+    this.dateEnd = null;
     this.display = false;
     this.dialogs = [];
-    this.datepickerOpts = {
+    this.datePickerFromOpts = {
       autoclose: true,
       format: 'yyyy-mm-dd',
       todayHighlight: true,
       language: "uk",
-      placeholder: 'Виберіть дату'
+      placeholder: 'Виберіть дату початку'
+    }
+    this.datePickerToOpts = {
+      autoclose: true,
+      format: 'yyyy-mm-dd',
+      todayHighlight: true,
+      language: "uk",
+      placeholder: 'Виберіть кінцеву дату'
     }
   }
 
@@ -55,34 +65,37 @@ export class DialogComponent implements OnInit {
     let text = null;
     let operator_name = null;
     let customer_id = null;
-    let date = null;
-    if (this.searchForm.value.operator_name != null && this.searchForm.value.operator_name != "") {
+    let dateStart = null;
+    let dateEnd = null;
+    if (this.searchForm.value.operator_name && this.searchForm.value.operator_name != "") {
       operator_name = this.searchForm.value.operator_name;
     }
-    if (this.searchForm.value.customer_id != null && this.searchForm.value.customer_id != "") {
+    if (this.searchForm.value.customer_id && this.searchForm.value.customer_id != "") {
       customer_id = this.searchForm.value.customer_id;
     }
-    if (this.searchForm.value.text != null && this.searchForm.value.text != "") {
+    if (this.searchForm.value.text && this.searchForm.value.text != "") {
       text = this.searchForm.value.text;
     }
-    if (this.date != null) {
-      date = this.date.getFullYear() + '-' + ('0' + (this.date.getMonth() + 1)).slice(-2) + '-' + ('0' + this.date.getDate()).slice(-2)
+    if (this.dateStart && this.dateEnd && this.dateStart < this.dateEnd) {
+
+      dateStart = this.dateStart.getFullYear() + '-' + ('0' + (this.dateStart.getMonth() + 1)).slice(-2) + '-' + ('0' + this.dateStart.getDate()).slice(-2)
+      dateEnd = this.dateEnd.getFullYear() + '-' + ('0' + (this.dateEnd.getMonth() + 1)).slice(-2) + '-' + ('0' + this.dateEnd.getDate()).slice(-2)
     }
-    if (operator_name != null && customer_id != null && date != null) {
-      this.dialogService.getAllCustomerAndOperatorDialogsForDate(customer_id, operator_name, date).subscribe(this.dataHandler, this.searchErrorHandler);
-    } else if (operator_name != null && customer_id != null) {
+    if (operator_name && customer_id && dateStart && dateEnd) {
+      this.dialogService.getAllCustomerAndOperatorDialogsForDate(customer_id, operator_name, dateStart, dateEnd).subscribe(this.dataHandler, this.searchErrorHandler);
+    } else if (operator_name && customer_id) {
       this.dialogService.getAllCustomerAndOperatorDialogs(customer_id, operator_name).subscribe(data => this.dataHandler(data), this.searchErrorHandler);
-    } else if (operator_name != null && date != null) {
-      this.dialogService.getAllOperatorDialogsForDate(operator_name, date).subscribe(data => this.dataHandler(data), this.searchErrorHandler);
-    } else if (customer_id != null && date != null) {
-      this.dialogService.getAllCustomerDialogsForDate(customer_id, date).subscribe(data => this.dataHandler(data), this.searchErrorHandler);
-    } else if (operator_name != null) {
+    } else if (operator_name && dateStart && dateEnd) {
+      this.dialogService.getAllOperatorDialogsForDate(operator_name, dateStart, dateEnd).subscribe(data => this.dataHandler(data), this.searchErrorHandler);
+    } else if (customer_id && dateStart && dateEnd) {
+      this.dialogService.getAllCustomerDialogsForDate(customer_id, dateStart, dateEnd).subscribe(data => this.dataHandler(data), this.searchErrorHandler);
+    } else if (operator_name) {
       this.dialogService.getAllOperatorDialogs(operator_name).subscribe(data => this.dataHandler(data), this.searchErrorHandler);
-    } else if (customer_id != null) {
+    } else if (customer_id) {
       this.dialogService.getAllCustomerDialogs(customer_id).subscribe(data => this.dataHandler(data), this.searchErrorHandler);
-    } else if (date != null) {
-      this.dialogService.getAllForDate(date).subscribe(data => this.dataHandler(data), this.searchErrorHandler);
-    } else if (text != null){
+    } else if (dateStart && dateEnd) {
+      this.dialogService.getAllForDate(dateStart, dateEnd).subscribe(data => this.dataHandler(data), this.searchErrorHandler);
+    } else if (text && text != "") {
       this.dialogService.getAllDialogsWithTextInMessage(text).subscribe(data => this.dataHandler(data), this.searchErrorHandler);
     }
     else {
@@ -111,16 +124,13 @@ export class DialogComponent implements OnInit {
     this.noSearchParametersNotification = false;
     this.noSearchResult = false;
     this.dialogs = [];
-    this.date = null;
+    this.dateStart = null;
+    this.dateEnd = null;
     this.createEmptyForm();
   }
 
   searchErrorHandler(error: any) {
     alert("У ході пошуку виникла помилка, спробуйте пізніше або зверніться до адміністратора");
-  }
-
-  doSmth() {
-    console.log(this.date.getFullYear() + '-' + ('0' + (this.date.getMonth() + 1)).slice(-2) + '-' + ('0' + this.date.getDate()).slice(-2));
   }
 
 }

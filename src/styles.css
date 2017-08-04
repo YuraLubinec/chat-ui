@@ -15,8 +15,12 @@
   transition:opacity 5s linear !important;
 }
 
-.no-marging {
+.no-margin {
   margin: 0px !important;
+}
+
+.no-padding {
+  padding: 0px !important;
 }
 
 .display-inline {

@@ -11,16 +11,17 @@
             </div>
             <div class="add-margin">
               <div *ngIf="noSearchParametersNotification" class="alert alert-danger">
-                Введіть параметри пошуку!
+                Введіть коректні параметри пошуку!
               </div>
               <div *ngIf="noSearchResult" class="alert alert-info">
                 За даними параметрами збігів не знайдено!
               </div>
-              <div class="form-group">
-                <label class="">Пошук по даті:
-            <datetime [(ngModel)]="date" [timepicker]="false" [datepicker]="datepickerOpts"></datetime>
-          </label>
-              </div>
+               
+                <label><p class="no-margin no-padding col-lg-12 col-md-12">Пошук по даті</p>
+                  <datetime [(ngModel)]="dateStart" [timepicker]="false" [datepicker]="datePickerFromOpts" class="no-padding col-lg-6 col-md-6"></datetime>
+                  <datetime [(ngModel)]="dateEnd" [timepicker]="false" [datepicker]="datePickerToOpts" class="no-padding col-lg-6 col-md-6"></datetime>
+                </label>
+           
               <form role="form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
                 <fieldset>
                   <div class="form-group">
@@ -46,7 +47,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="dialogs.length != 0">
+      <div *ngIf="dialogs.length != 0 && !display">
         <div class="col-lg-6 col-md-12">
           <div class="panel panel-default">
             <div class="panel-heading">
@@ -89,7 +90,6 @@
           <button class="btn btn-default" (click)="hideDialog()">Назад</button>
         </div>
       </div>
-
     </div>
   </div>
 </div>
