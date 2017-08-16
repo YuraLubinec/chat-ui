@@ -21,6 +21,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { UserComponent } from './user/user.component';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { StatisticCommonOperatorsComponent } from "./statistic_common_operators/statistic_common_operators.component";
+import { StatisticCommonCustomersComponent } from "./statistic_common_customers/statistic_common_customers.component";
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { StatisticCommonOperatorsComponent } from "./statistic_common_operators/
     DialogComponent,
     UserComponent,
     StatisticCommonOperatorsComponent,
+    StatisticCommonCustomersComponent,
     
   ],
   imports: [

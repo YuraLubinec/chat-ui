@@ -28,6 +28,9 @@
           <li routerLinkActive="active">
             <a [routerLink]="['statistic/allOperators']">Загальна по операторах</a>
           </li>
+          <li routerLinkActive="active">
+            <a [routerLink]="['statistic/allCustomers']">Загальна по споживачах</a>
+          </li>
         </ul>
       </li>
       <li *ngIf="getUserRole()==='ADMIN'" routerLinkActive="active">

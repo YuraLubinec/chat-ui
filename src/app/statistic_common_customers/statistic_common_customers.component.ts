@@ -4,13 +4,13 @@ import { StatisticService } from "app/services/statistic.service";
 import { CommonStatistic } from "app/models/commonStatistic";
 
 @Component({
-  selector: 'commonOperators',
-  templateUrl: './statistic_common_operators.component.html',
-  styleUrls: ['./statistic_common_operators.component.css'],
+  selector: 'commonCustomers',
+  templateUrl: './statistic_common_customers.component.html',
+  styleUrls: ['./statistic_common_customers.component.css'],
   providers: [StatisticService]
 })
-export class StatisticCommonOperatorsComponent implements OnInit {
-    private noSearchParametersNotification: boolean;
+export class StatisticCommonCustomersComponent implements OnInit {
+private noSearchParametersNotification: boolean;
     private datePickerFromOpts;
     private datePickerToOpts;
     private dateStart: Date;
@@ -41,9 +41,9 @@ export class StatisticCommonOperatorsComponent implements OnInit {
 
     this.barChartLabels = [''];
     this.barChartData = [
-     // {data: [], label: 'Пропущені'},
+      {data: [], label: 'Пропущені'},
       {data: [], label: 'Загальна кількість'},
-      //{data: [], label: 'Оброблені'},
+      {data: [], label: 'Оброблені'},
       {data: [], label: 'Середінй час утримання'},
       {data: [], label: 'Середнє число рейтингу'}
     ];
@@ -61,9 +61,9 @@ export class StatisticCommonOperatorsComponent implements OnInit {
        this.statisticDateEnd = '';
       this.barChartLabels = [''];
       this.barChartData = [
-      //{data: [], label: 'Пропущені'},
+      {data: [], label: 'Пропущені'},
       {data: [], label: 'Загальна кількість'},
-      //{data: [], label: 'Оброблені'},
+      {data: [], label: 'Оброблені'},
       {data: [], label: 'Середінй час утримання'},
       {data: [], label: 'Середнє число рейтингу'}
     ];
@@ -75,7 +75,7 @@ export class StatisticCommonOperatorsComponent implements OnInit {
         this.statisticDateStart = dateStart;
         this.statisticDateEnd = dateEnd;
 
-        this.statisticService.getOperatorListStatistic(dateStart, dateEnd).subscribe(data => this.dataHandler(data), this.searchErrorHandler);
+        this.statisticService.getCustomerListStatistic(dateStart, dateEnd).subscribe(data => this.dataHandler(data), this.searchErrorHandler);
     }
   }
 
@@ -99,9 +99,9 @@ export class StatisticCommonOperatorsComponent implements OnInit {
     this.operatorStatistic = staticData.json()  as Array<CommonStatistic>;
 
     let barChartDataResponse = [
-     // {data: [], label: 'Пропущені'},
+      {data: [], label: 'Пропущені'},
       {data: [], label: 'Загальна кількість'},
-      //{data: [], label: 'Оброблені'},
+      {data: [], label: 'Оброблені'},
       {data: [], label: 'Середінй час утримання'},
       {data: [], label: 'Середнє число рейтингу'}
     ];
@@ -109,15 +109,15 @@ export class StatisticCommonOperatorsComponent implements OnInit {
       for(let i = 0; i < this.operatorStatistic.length; i++){       
         this.barChartLabels[i] = staticData.json()[i]._id;
 
-        //barChartDataResponse[0].data[i] = staticData.json()[i].countLost;
+        barChartDataResponse[0].data[i] = staticData.json()[i].countLost;
 
-        barChartDataResponse[0].data[i] = staticData.json()[i].countAll;
+        barChartDataResponse[1].data[i] = staticData.json()[i].countAll;
 
-        //barChartDataResponse[2].data[i] = staticData.json()[i].countHandled;
+        barChartDataResponse[2].data[i] = staticData.json()[i].countHandled;
 
-        barChartDataResponse[1].data[i] = staticData.json()[i].averageHoldTime;
+        barChartDataResponse[3].data[i] = staticData.json()[i].averageHoldTime;
         
-        barChartDataResponse[2].data[i] = staticData.json()[i].averageRate;
+        barChartDataResponse[4].data[i] = staticData.json()[i].averageRate;
       }
 
     this.barChartData = barChartDataResponse;
@@ -127,4 +127,5 @@ export class StatisticCommonOperatorsComponent implements OnInit {
     console.log(error);
     alert("У ході пошуку виникла помилка, спробуйте пізніше або зверніться до адміністратора");
   }
+
 }
