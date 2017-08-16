@@ -14,6 +14,7 @@ import { NoAuthGuard } from './guards/noAuthGurad';
 import { AuthGuard } from './guards/authGuard';
 import { AppModule } from "../app.module";
 import { AuthenticationService } from '../services/authentication.service';
+import { StatisticCommonOperatorsComponent } from "../statistic_common_operators/statistic_common_operators.component";
 
 const appRoutes: Routes = [
   { path: "login", component: LoginComponent, canActivate: [NoAuthGuard] },
@@ -22,7 +23,8 @@ const appRoutes: Routes = [
       { path: "home", component: HomeComponent, canActivate: [AuthGuard] },
       { path: "user", component: UserComponent, canActivate: [AuthGuard] },
       { path: "chat", component: ChatComponent, canActivate: [OperatorAuthGuard] },
-      { path: "statistic", component: StatisticComponent, canActivate: [AdminAuthGuard] },
+      { path: "statistic/allAppeals", component: StatisticComponent, canActivate: [AdminAuthGuard] },
+      { path: "statistic/allOperators", component: StatisticCommonOperatorsComponent, canActivate: [AdminAuthGuard] },
       { path: "registration", component: RegistrationComponent, canActivate: [AdminAuthGuard] },
       { path: "dialog", component: DialogComponent, canActivate: [AdminAuthGuard] },
       { path: '', redirectTo: 'home', pathMatch: 'full', canActivate: [AuthGuard] },

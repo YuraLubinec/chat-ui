@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
 import { StatisticService } from "app/services/statistic.service";
+import { CommonStatistic } from "app/models/commonStatistic";
 
 @Component({
   selector: 'commonApeals',
-  templateUrl: './statistic.component.html',
-  styleUrls: ['./statistic.component.css'],
+  templateUrl: './statistic_common_operators.component.html',
+  styleUrls: ['./statistic_common_operators.component.css'],
   providers: [StatisticService]
 })
-export class StatisticComponent implements OnInit {
+export class StatisticCommonOperatorsComponent implements OnInit {
     private noSearchParametersNotification: boolean;
     private datePickerFromOpts;
     private datePickerToOpts;
@@ -16,6 +17,7 @@ export class StatisticComponent implements OnInit {
     private dateEnd: Date;
     private statisticDateStart = '';
     private statisticDateEnd = '';
+    private operatorStatistic: Array<CommonStatistic>;
     public barChartLabels:string[];
     public barChartType:string = 'bar';
     public barChartLegend:boolean = true;
@@ -39,9 +41,9 @@ export class StatisticComponent implements OnInit {
 
     this.barChartLabels = [''];
     this.barChartData = [
-      {data: [], label: 'Пропущені'},
+     // {data: [], label: 'Пропущені'},
       {data: [], label: 'Загальна кількість'},
-      {data: [], label: 'Оброблені'},
+      //{data: [], label: 'Оброблені'},
       {data: [], label: 'Середінй час утримання'},
       {data: [], label: 'Середнє число рейтингу'}
     ];
@@ -55,11 +57,13 @@ export class StatisticComponent implements OnInit {
 
     if(this.dateStart == undefined || this.dateEnd == undefined){
       this.noSearchParametersNotification = true;
+      this.statisticDateStart = '';
+       this.statisticDateEnd = '';
       this.barChartLabels = [''];
       this.barChartData = [
-      {data: [], label: 'Пропущені'},
+      //{data: [], label: 'Пропущені'},
       {data: [], label: 'Загальна кількість'},
-      {data: [], label: 'Оброблені'},
+      //{data: [], label: 'Оброблені'},
       {data: [], label: 'Середінй час утримання'},
       {data: [], label: 'Середнє число рейтингу'}
     ];
@@ -71,8 +75,7 @@ export class StatisticComponent implements OnInit {
         this.statisticDateStart = dateStart;
         this.statisticDateEnd = dateEnd;
 
-        this.barChartLabels = [this.statisticDateStart + ' - ' + this.statisticDateEnd];
-        this.statisticService.getCommonStatisticByAllOparators(dateStart, dateEnd).subscribe(data => this.dataHandler(data), this.searchErrorHandler);
+        this.statisticService.getOperatorListStatistic(dateStart, dateEnd).subscribe(data => this.dataHandler(data), this.searchErrorHandler);
     }
   }
 
@@ -90,24 +93,34 @@ export class StatisticComponent implements OnInit {
   }
   
   private dataHandler(staticData: Response) {
+    console.log(staticData);
+    console.log(staticData.json());
 
-    if(!staticData['_body']){
-      this.barChartData = [
-            {data: [], label: 'Пропущені'},
-            {data: [], label: 'Загальна кількість'},
-            {data: [], label: 'Оброблені'},
-            {data: [], label: 'Середінй час утримання'},
-            {data: [], label: 'Середнє число рейтингу'}
+    this.operatorStatistic = staticData.json()  as Array<CommonStatistic>;
+
+    let barChartDataResponse = [
+     // {data: [], label: 'Пропущені'},
+      {data: [], label: 'Загальна кількість'},
+      //{data: [], label: 'Оброблені'},
+      {data: [], label: 'Середінй час утримання'},
+      {data: [], label: 'Середнє число рейтингу'}
     ];
-    }else{
-      this.barChartData = [
-        {data: [staticData.json().countLost], label: 'Пропущені'},
-        {data: [staticData.json().countAll], label: 'Загальна кількість'},
-        {data: [staticData.json().countHandled], label: 'Оброблені'},
-        {data: [staticData.json().averageHoldTime], label: 'Середінй час утримання'},
-        {data: [staticData.json().averageRate], label: 'Середнє число рейтингу'}
-      ];
-    }
+
+      for(let i = 0; i < this.operatorStatistic.length; i++){       
+        this.barChartLabels[i] = staticData.json()[i]._id;
+
+        //barChartDataResponse[0].data[i] = staticData.json()[i].countLost;
+
+        barChartDataResponse[0].data[i] = staticData.json()[i].countAll;
+
+        //barChartDataResponse[2].data[i] = staticData.json()[i].countHandled;
+
+        barChartDataResponse[1].data[i] = staticData.json()[i].averageHoldTime;
+        
+        barChartDataResponse[2].data[i] = staticData.json()[i].averageRate;
+      }
+
+    this.barChartData = barChartDataResponse;
   }
 
   private searchErrorHandler(error: any) {

@@ -20,6 +20,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { UserComponent } from './user/user.component';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { StatisticCommonOperatorsComponent } from "./statistic_common_operators/statistic_common_operators.component";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,9 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     MainComponent,
     RegistrationComponent,
     DialogComponent,
-    UserComponent
+    UserComponent,
+    StatisticCommonOperatorsComponent,
+    
   ],
   imports: [
     BrowserModule, HttpModule, FormsModule, ReactiveFormsModule, RoutingModule, NKDatetimeModule, ChartsModule
