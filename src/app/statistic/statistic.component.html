@@ -1,8 +1,39 @@
 <div id="page-wrapper">
   <div class="row">
     <div class="col-lg-12 col-md-12">
-      <h1 class="page-header">Сторінка для перегляду статистики</h1>
+      <h1 class="page-header">Загальна статистика отриманих повідомлення</h1>
     </div>
     <!-- /.col-lg-12 -->
+    <div *ngIf="!display">
+      <div class="col-lg-7 col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            Виберіть дату для відображення статистики
+          </div>
+          <div class="add-margin">
+            <div *ngIf="noSearchParametersNotification" class="alert alert-danger">
+              Введіть коректні параметри!
+            </div>
+            <label><p class="no-margin no-padding col-lg-12 col-md-12">Пошук по даті</p>
+                  <datetime [(ngModel)]="dateStart" [timepicker]="false" [datepicker]="datePickerFromOpts" class="no-left-padding col-lg-6 col-md-6"></datetime>
+                  <datetime [(ngModel)]="dateEnd" [timepicker]="false" [datepicker]="datePickerToOpts" class="no-left-padding col-lg-6 col-md-6"></datetime>
+                </label>
+            <form role="form" (ngSubmit)="onSubmit()">
+              <fieldset>
+                <div class="">
+                  <button type="submit" class="btn btn-success">Показати</button>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="display: block">
+        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+          [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+      </div>
+    </div>
   </div>
 </div>

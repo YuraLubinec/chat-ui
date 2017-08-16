@@ -103,7 +103,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.personalSubscription = null;
     this.customer_id = null;
     this.dialog_id = null;
-    this.messages = null;
+    this.messages = [];
     this.display = false;
     this.stomp.after('init').then(() => {
       this.sendChatEndMessage(customer, dialog);

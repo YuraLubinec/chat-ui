@@ -19,6 +19,7 @@ import { MainComponent } from './main/main.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { UserComponent } from './user/user.component';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { UserComponent } from './user/user.component';
     UserComponent
   ],
   imports: [
-    BrowserModule, HttpModule, FormsModule, ReactiveFormsModule, RoutingModule, NKDatetimeModule
+    BrowserModule, HttpModule, FormsModule, ReactiveFormsModule, RoutingModule, NKDatetimeModule, ChartsModule
   ],
   providers: [AuthenticationService, StompService, UserService],
   bootstrap: [AppComponent]

@@ -130,6 +130,7 @@ export class DialogComponent implements OnInit {
   }
 
   searchErrorHandler(error: any) {
+    console.log(error);
     alert("У ході пошуку виникла помилка, спробуйте пізніше або зверніться до адміністратора");
   }
 

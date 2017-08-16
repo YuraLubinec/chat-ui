@@ -32,6 +32,7 @@
         "../node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js",
         "../node_modules/bootstrap-datepicker/dist/locales/bootstrap-datepicker.uk.min.js",
         "../node_modules/bootstrap-timepicker/js/bootstrap-timepicker.min.js",
+        "../node_modules/chart.js/dist/chart.js",
         "../vendor/metisMenu/js/metisMenu.min.js",
         "../vendor/sb-admin-2/js/sb-admin-2.min.js"       
       ],
