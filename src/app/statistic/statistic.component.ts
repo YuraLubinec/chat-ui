@@ -63,7 +63,8 @@ export class StatisticComponent implements OnInit {
       {data: [], label: 'Середінй час утримання'},
       {data: [], label: 'Середнє число рейтингу'}
     ];
-    } else {
+  } else {
+        this.noSearchParametersNotification = false;
         dateStart = this.dateStart.getFullYear() + '-' + ('0' + (this.dateStart.getMonth() + 1)).slice(-2) + '-' + ('0' + this.dateStart.getDate()).slice(-2);
         dateEnd = this.dateEnd.getFullYear() + '-' + ('0' + (this.dateEnd.getMonth() + 1)).slice(-2) + '-' + ('0' + this.dateEnd.getDate()).slice(-2);
         

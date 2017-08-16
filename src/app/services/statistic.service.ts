@@ -10,7 +10,22 @@ export class StatisticService {
 
   }
     getCommonStatisticByAllOparators(dateStart: string, dateEnd:string): Observable<Response> {
-        console.log("Service statistic all operator")
         return this.http.get(this.baseUrl + "/all/" + dateStart +"_"+ dateEnd, { withCredentials: true });
+    }
+
+    getOperatorStatistic(operatorId:string, dateBeg:string, dateEnd:string): Observable<Response> {
+        return this.http.get(this.baseUrl + "/operator/" + operatorId + "/" + dateBeg + "/"+ dateEnd, { withCredentials: true });
+    }
+
+    getOperatorListStatistic(dateBeg:string, dateEnd:string): Observable<Response> {
+        return this.http.get(this.baseUrl + "/operator/operators_stat/" + dateBeg + "/"+ dateEnd, { withCredentials: true });
+    }
+
+    getCustomerStatistic(customerId:string, dateBeg:string, dateEnd:string): Observable<Response>{
+        return this.http.get(this.baseUrl + "/customer/" + customerId + "/" + dateBeg + "/"+ dateEnd, { withCredentials: true });
+    }
+
+    getCustomerListStatistic(dateBeg:string, dateEnd:string): Observable<Response>{
+        return this.http.get(this.baseUrl + "/customer/customers_stat/" + dateBeg + "/"+ dateEnd, { withCredentials: true });
     }
 }
