@@ -20,6 +20,11 @@
                 </label>
             <form role="form" (ngSubmit)="onSubmit()">
               <fieldset>
+              <div class="form-group">
+                    <label class="center-block">Пошук по імені оператора:
+                        <input [(ngModel)]="operatorName" name = "name" class="form-control" placeholder="введіть логін оператора для пошуку" type="text">
+                    </label>
+                  </div>
                 <div class="">
                   <button type="submit" class="btn btn-success">Показати</button>
                 </div>

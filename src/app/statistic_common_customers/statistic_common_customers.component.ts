@@ -13,6 +13,7 @@ export class StatisticCommonCustomersComponent implements OnInit {
 private noSearchParametersNotification: boolean;
     private datePickerFromOpts;
     private datePickerToOpts;
+    private customerName;
     private dateStart: Date;
     private dateEnd: Date;
     private statisticDateStart = '';
@@ -75,7 +76,12 @@ private noSearchParametersNotification: boolean;
         this.statisticDateStart = dateStart;
         this.statisticDateEnd = dateEnd;
 
-        this.statisticService.getCustomerListStatistic(dateStart, dateEnd).subscribe(data => this.dataHandler(data), this.searchErrorHandler);
+          if(this.customerName === undefined || this.customerName ==''){
+              this.statisticService.getCustomerListStatistic(dateStart, dateEnd).subscribe(data => this.dataHandler(data), this.searchErrorHandler);
+          }else{
+              this.barChartLabels = [this.customerName];
+              this.statisticService.getCustomerStatistic(this.customerName,dateStart, dateEnd).subscribe(data => this.dataHandlerCustomer(data), this.searchErrorHandler);
+          }  
     }
   }
 
@@ -121,6 +127,27 @@ private noSearchParametersNotification: boolean;
       }
 
     this.barChartData = barChartDataResponse;
+  }
+
+   private dataHandlerCustomer(staticData: Response) {
+
+    if(!staticData['_body']){
+      this.barChartData = [
+            {data: [], label: 'Пропущені'},
+            {data: [], label: 'Загальна кількість'},
+            {data: [], label: 'Оброблені'},
+            {data: [], label: 'Середінй час утримання'},
+            {data: [], label: 'Середнє число рейтингу'}
+    ];
+    }else{
+      this.barChartData = [
+        {data: [staticData.json().countLost], label: 'Пропущені'},
+        {data: [staticData.json().countAll], label: 'Загальна кількість'},
+        {data: [staticData.json().countHandled], label: 'Оброблені'},
+        {data: [staticData.json().averageHoldTime], label: 'Середінй час утримання'},
+        {data: [staticData.json().averageRate], label: 'Середнє число рейтингу'}
+      ];
+    }
   }
 
   private searchErrorHandler(error: any) {

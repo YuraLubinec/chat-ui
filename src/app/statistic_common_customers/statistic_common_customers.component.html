@@ -1,7 +1,7 @@
 <div id="page-wrapper">
   <div class="row">
     <div class="col-lg-12 col-md-12">
-      <h1 class="page-header">Статистика по операторах</h1>
+      <h1 class="page-header">Статистика по клієнтах</h1>
     </div>
     <!-- /.col-lg-12 -->
     <div *ngIf="!display">
@@ -20,6 +20,12 @@
                 </label>
             <form role="form" (ngSubmit)="onSubmit()">
               <fieldset>
+
+              <div class="form-group">
+                    <label class="center-block">Пошук по імені клієнта:
+                        <input [(ngModel)]="customerName" name = "name" class="form-control" placeholder="введіть особовий рахунок або номер договору клієнта" type="text">
+                    </label>
+                  </div>
                 <div class="">
                   <button type="submit" class="btn btn-success">Показати</button>
                 </div>

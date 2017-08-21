@@ -14,7 +14,7 @@ export class StatisticService {
     }
 
     getOperatorStatistic(operatorId:string, dateBeg:string, dateEnd:string): Observable<Response> {
-        return this.http.get(this.baseUrl + "/operator/" + operatorId + "/" + dateBeg + "/" + dateEnd, { withCredentials: true });
+        return this.http.get(this.baseUrl + "/operator/" + operatorId + "/" + dateBeg + "_" + dateEnd, { withCredentials: true });
     }
 
     getOperatorListStatistic(dateBeg:string, dateEnd:string): Observable<Response> {

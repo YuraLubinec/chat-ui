@@ -11,6 +11,7 @@ import { CommonStatistic } from "app/models/commonStatistic";
 })
 export class StatisticCommonOperatorsComponent implements OnInit {
     private noSearchParametersNotification: boolean;
+    private operatorName = '';
     private datePickerFromOpts;
     private datePickerToOpts;
     private dateStart: Date;
@@ -75,7 +76,14 @@ export class StatisticCommonOperatorsComponent implements OnInit {
         this.statisticDateStart = dateStart;
         this.statisticDateEnd = dateEnd;
 
-        this.statisticService.getOperatorListStatistic(dateStart, dateEnd).subscribe(data => this.dataHandler(data), this.searchErrorHandler);
+        if(this.operatorName == ''){
+            this.statisticService.getOperatorListStatistic(dateStart, dateEnd).subscribe(data => this.dataHandler(data), this.searchErrorHandler);
+        }else {
+          this.barChartLabels = [this.operatorName];
+          this.statisticService.getOperatorStatistic(this.operatorName, dateStart, dateEnd).subscribe(data => this.dataHandlerOperator(data), this.searchErrorHandler);
+        }
+
+        
     }
   }
 
@@ -93,8 +101,6 @@ export class StatisticCommonOperatorsComponent implements OnInit {
   }
   
   private dataHandler(staticData: Response) {
-    console.log(staticData);
-    console.log(staticData.json());
 
     this.operatorStatistic = staticData.json()  as Array<CommonStatistic>;
 
@@ -121,6 +127,27 @@ export class StatisticCommonOperatorsComponent implements OnInit {
       }
 
     this.barChartData = barChartDataResponse;
+  }
+
+    private dataHandlerOperator(staticData: Response) {
+
+       if(!staticData['_body']){
+      this.barChartData = [
+            //{data: [], label: 'Пропущені'},
+            {data: [], label: 'Загальна кількість'},
+           // {data: [], label: 'Оброблені'},
+            {data: [], label: 'Середінй час утримання'},
+            {data: [], label: 'Середнє число рейтингу'}
+    ];
+    }else{
+      this.barChartData = [
+       // {data: [staticData.json().countLost], label: 'Пропущені'},
+        {data: [staticData.json().countAll], label: 'Загальна кількість'},
+       // {data: [staticData.json().countHandled], label: 'Оброблені'},
+        {data: [staticData.json().averageHoldTime], label: 'Середінй час утримання'},
+        {data: [staticData.json().averageRate], label: 'Середнє число рейтингу'}
+      ];
+    }
   }
 
   private searchErrorHandler(error: any) {

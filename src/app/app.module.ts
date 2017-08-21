@@ -23,6 +23,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { StatisticCommonOperatorsComponent } from "./statistic_common_operators/statistic_common_operators.component";
 import { StatisticCommonCustomersComponent } from "./statistic_common_customers/statistic_common_customers.component";
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,8 +38,7 @@ import { StatisticCommonCustomersComponent } from "./statistic_common_customers/
     DialogComponent,
     UserComponent,
     StatisticCommonOperatorsComponent,
-    StatisticCommonCustomersComponent,
-    
+    StatisticCommonCustomersComponent   
   ],
   imports: [
     BrowserModule, HttpModule, FormsModule, ReactiveFormsModule, RoutingModule, NKDatetimeModule, ChartsModule
