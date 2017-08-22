@@ -13,6 +13,8 @@ export class StatisticCommonCustomersComponent implements OnInit {
 private noSearchParametersNotification: boolean;
     private datePickerFromOpts;
     private datePickerToOpts;
+    private emptyhResult: boolean;
+    private notEmptyhResult: boolean;
     private customerName;
     private dateStart: Date;
     private dateEnd: Date;
@@ -77,6 +79,7 @@ private noSearchParametersNotification: boolean;
         this.statisticDateEnd = dateEnd;
 
           if(this.customerName === undefined || this.customerName ==''){
+              this.barChartLabels = [];
               this.statisticService.getCustomerListStatistic(dateStart, dateEnd).subscribe(data => this.dataHandler(data), this.searchErrorHandler);
           }else{
               this.barChartLabels = [this.customerName];
@@ -99,10 +102,12 @@ private noSearchParametersNotification: boolean;
   }
   
   private dataHandler(staticData: Response) {
-    console.log(staticData);
-    console.log(staticData.json());
-
     this.operatorStatistic = staticData.json()  as Array<CommonStatistic>;
+
+    console.log(this.operatorStatistic.length);
+    if(this.operatorStatistic.length == 0){
+      this.emptyhResult = true;
+    }
 
     let barChartDataResponse = [
       {data: [], label: 'Пропущені'},
@@ -132,6 +137,10 @@ private noSearchParametersNotification: boolean;
    private dataHandlerCustomer(staticData: Response) {
 
     if(!staticData['_body']){
+
+      this.emptyhResult = true;
+      this.notEmptyhResult = false;
+
       this.barChartData = [
             {data: [], label: 'Пропущені'},
             {data: [], label: 'Загальна кількість'},
@@ -139,7 +148,9 @@ private noSearchParametersNotification: boolean;
             {data: [], label: 'Середінй час утримання'},
             {data: [], label: 'Середнє число рейтингу'}
     ];
-    }else{
+  }else{
+      this.emptyhResult = false;
+      this.notEmptyhResult = true;
       this.barChartData = [
         {data: [staticData.json().countLost], label: 'Пропущені'},
         {data: [staticData.json().countAll], label: 'Загальна кількість'},

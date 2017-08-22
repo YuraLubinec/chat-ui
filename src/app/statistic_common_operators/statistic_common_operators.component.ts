@@ -16,6 +16,7 @@ export class StatisticCommonOperatorsComponent implements OnInit {
     private datePickerToOpts;
     private dateStart: Date;
     private dateEnd: Date;
+    private emptyhResult: boolean;
     private statisticDateStart = '';
     private statisticDateEnd = '';
     private operatorStatistic: Array<CommonStatistic>;
@@ -103,7 +104,12 @@ export class StatisticCommonOperatorsComponent implements OnInit {
   private dataHandler(staticData: Response) {
 
     this.operatorStatistic = staticData.json()  as Array<CommonStatistic>;
-
+    if(this.operatorStatistic.length == 0){
+      this.emptyhResult = true;
+    }else{
+      this.emptyhResult = false;
+    }
+    
     let barChartDataResponse = [
      // {data: [], label: 'Пропущені'},
       {data: [], label: 'Загальна кількість'},
@@ -132,6 +138,7 @@ export class StatisticCommonOperatorsComponent implements OnInit {
     private dataHandlerOperator(staticData: Response) {
 
        if(!staticData['_body']){
+         this.emptyhResult = true;
       this.barChartData = [
             //{data: [], label: 'Пропущені'},
             {data: [], label: 'Загальна кількість'},
@@ -139,7 +146,8 @@ export class StatisticCommonOperatorsComponent implements OnInit {
             {data: [], label: 'Середінй час утримання'},
             {data: [], label: 'Середнє число рейтингу'}
     ];
-    }else{
+  }else{
+      this.emptyhResult = false;
       this.barChartData = [
        // {data: [staticData.json().countLost], label: 'Пропущені'},
         {data: [staticData.json().countAll], label: 'Загальна кількість'},

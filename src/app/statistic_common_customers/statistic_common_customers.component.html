@@ -20,7 +20,6 @@
                 </label>
             <form role="form" (ngSubmit)="onSubmit()">
               <fieldset>
-
               <div class="form-group">
                     <label class="center-block">Пошук по імені клієнта:
                         <input [(ngModel)]="customerName" name = "name" class="form-control" placeholder="введіть особовий рахунок або номер договору клієнта" type="text">
@@ -43,6 +42,9 @@
             </div>
             <div class="add-margin">
              <h2>{{ statisticDateStart }} - {{ statisticDateEnd }} </h2>
+            </div>
+            <div *ngIf="emptyhResult" class="alert alert-info">
+                    За даними параметрами результатів не знайдено!
             </div>
           </div>
         </div>

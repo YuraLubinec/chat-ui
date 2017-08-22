@@ -10,6 +10,8 @@ import { StatisticService } from "app/services/statistic.service";
 })
 export class StatisticComponent implements OnInit {
     private noSearchParametersNotification: boolean;
+    private emptyhResult: boolean;
+    private notEmptyhResult: boolean;
     private datePickerFromOpts;
     private datePickerToOpts;
     private dateStart: Date;
@@ -92,6 +94,8 @@ export class StatisticComponent implements OnInit {
   private dataHandler(staticData: Response) {
 
     if(!staticData['_body']){
+      this.emptyhResult = true;
+      this.notEmptyhResult = false;
       this.barChartData = [
             {data: [], label: 'Пропущені'},
             {data: [], label: 'Загальна кількість'},
@@ -99,7 +103,9 @@ export class StatisticComponent implements OnInit {
             {data: [], label: 'Середінй час утримання'},
             {data: [], label: 'Середнє число рейтингу'}
     ];
-    }else{
+  }else{
+      this.emptyhResult = false;
+      this.notEmptyhResult = true;
       this.barChartData = [
         {data: [staticData.json().countLost], label: 'Пропущені'},
         {data: [staticData.json().countAll], label: 'Загальна кількість'},

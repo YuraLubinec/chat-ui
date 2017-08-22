@@ -20,6 +20,9 @@
                 </label>
             <form role="form" (ngSubmit)="onSubmit()">
               <fieldset>
+              <div *ngIf="emptyhResult" class="alert alert-info">
+                За даними параметрами результатів не знайдено!
+              </div>
                 <div class="">
                   <button type="submit" class="btn btn-success">Показати</button>
                 </div>
@@ -30,10 +33,12 @@
       </div>
     </div>
     <div>
+       <div *ngIf="notEmptyhResult">
       <div style="display: block">
         <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
           [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
       </div>
+       </div>
     </div>
   </div>
 </div>

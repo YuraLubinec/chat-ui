@@ -43,6 +43,9 @@
             <div class="add-margin">
              <h2>{{ statisticDateStart }} - {{ statisticDateEnd }} </h2>
             </div>
+            <div *ngIf="emptyhResult" class="alert alert-info">
+                    За даними параметрами результатів не знайдено!
+            </div>
           </div>
         </div>
       </div>
