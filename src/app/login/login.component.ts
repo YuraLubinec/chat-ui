@@ -10,11 +10,11 @@ import { LoginUser } from '../models/loginUser'
 })
 export class LoginComponent implements OnInit {
 
-  private loginForm: FormGroup;
-  private errorOccured: Boolean;
-  private unexpectedErrorOccured: Boolean;
-  private authenticationErrorMessage = 'Неправильний логін або пароль';
-  private defaultErrorMessage = 'Сталася невідома помилка, спробуйте пізніше';
+  loginForm: FormGroup;
+  errorOccured: Boolean;
+  unexpectedErrorOccured: Boolean;
+  authenticationErrorMessage = 'Неправильний логін або пароль';
+  defaultErrorMessage = 'Сталася невідома помилка, спробуйте пізніше';
 
   constructor(private fb: FormBuilder, private authenticationService: AuthenticationService) {
 

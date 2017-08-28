@@ -12,15 +12,15 @@ import { DialogMessage } from '../models/dialogMessage';
   providers: [DialogService]
 })
 export class DialogComponent implements OnInit {
-  private noSearchParametersNotification: boolean;
-  private noSearchResult: boolean;
-  private datePickerFromOpts;
-  private datePickerToOpts;
-  private dateStart: Date;
-  private dateEnd: Date;
-  private searchForm: FormGroup;
-  private dialogs: Array<Dialog>;
-  private display: boolean;
+  noSearchParametersNotification: boolean;
+  noSearchResult: boolean;
+  datePickerFromOpts;
+  datePickerToOpts;
+  dateStart: Date;
+  dateEnd: Date;
+  searchForm: FormGroup;
+  dialogs: Array<Dialog>;
+  display: boolean;
   private selectedDialog: Dialog;
 
   constructor(private dialogService: DialogService, private fb: FormBuilder) {

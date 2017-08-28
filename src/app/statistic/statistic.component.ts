@@ -9,15 +9,15 @@ import { StatisticService } from "app/services/statistic.service";
   providers: [StatisticService]
 })
 export class StatisticComponent implements OnInit {
-    private noSearchParametersNotification: boolean;
-    private emptyhResult: boolean;
-    private notEmptyhResult: boolean;
-    private datePickerFromOpts;
-    private datePickerToOpts;
-    private dateStart: Date;
-    private dateEnd: Date;
-    private statisticDateStart = '';
-    private statisticDateEnd = '';
+    noSearchParametersNotification: boolean;
+    emptyhResult: boolean;
+    notEmptyhResult: boolean;
+    datePickerFromOpts;
+    datePickerToOpts;
+    dateStart: Date;
+    dateEnd: Date;
+    statisticDateStart = '';
+    statisticDateEnd = '';
     public barChartLabels:string[];
     public barChartType:string = 'bar';
     public barChartLegend:boolean = true;

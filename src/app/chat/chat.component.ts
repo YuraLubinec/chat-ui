@@ -14,17 +14,17 @@ import * as SockJS from 'sockjs-client';
 })
 export class ChatComponent implements OnInit, OnDestroy {
   
-  private display: boolean;
-  private webSocketConnectionError: string;
+  display: boolean;
+  webSocketConnectionError: string;
   private subscription: any;
   private personalSubscription: any;
   private clientRequestArraySubscription: any;
-  private messages: Message[];
-  private clientChatRequests: ConnectionMessage[];
-  private messageForm: FormGroup;
-  private dialog_id: string;
-  private operator_name: string;
-  private customer_id: string;
+  messages: Message[];
+  clientChatRequests: ConnectionMessage[];
+  messageForm: FormGroup;
+  dialog_id: string;
+  operator_name: string;
+  customer_id: string;
 
 
   constructor(private stomp: StompService, private fb: FormBuilder) {

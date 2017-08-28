@@ -12,12 +12,12 @@ import { User } from '../models/user';
 })
 export class RegistrationComponent implements OnInit {
 
-  private operationIsSuccess: boolean;
-  private display: string = 'password';
-  private registrationForm: FormGroup;
-  private roles: Array<any>;
-  private serverValidationError: string;
-  private users: Array<User>;
+  operationIsSuccess: boolean;
+  display: string = 'password';
+  registrationForm: FormGroup;
+  roles: Array<any>;
+  serverValidationError: string;
+  users: Array<User>;
   private subscription: any;
 
 

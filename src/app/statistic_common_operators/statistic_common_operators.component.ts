@@ -10,16 +10,16 @@ import { CommonStatistic } from "app/models/commonStatistic";
   providers: [StatisticService]
 })
 export class StatisticCommonOperatorsComponent implements OnInit {
-    private noSearchParametersNotification: boolean;
-    private operatorName = '';
-    private datePickerFromOpts;
-    private datePickerToOpts;
-    private dateStart: Date;
-    private dateEnd: Date;
-    private emptyhResult: boolean;
-    private statisticDateStart = '';
-    private statisticDateEnd = '';
-    private operatorStatistic: Array<CommonStatistic>;
+    noSearchParametersNotification: boolean;
+    operatorName = '';
+    datePickerFromOpts;
+    datePickerToOpts;
+    dateStart: Date;
+    dateEnd: Date;
+    emptyhResult: boolean;
+    statisticDateStart = '';
+    statisticDateEnd = '';
+    operatorStatistic: Array<CommonStatistic>;
     public barChartLabels:string[];
     public barChartType:string = 'bar';
     public barChartLegend:boolean = true;
